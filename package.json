@@ -1,0 +1,21 @@
+{
+  "name": "logo.io.js",
+  "version": "1.0.0",
+  "description": "ALL THE LOGOS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "io.js",
+    "iojs",
+    "logo"
+  ],
+  "author": "olizilla",
+  "license": "ISC",
+  "dependencies": {
+    "ecstatic": "^0.5.7",
+    "octonode": "^0.6.11",
+    "winston": "^0.8.3"
+  }
+}

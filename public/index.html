@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>io.js logo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{
+      font-family:futura;
+      text-align:center;
+    }
+    h1{
+      font-weight:400;
+    }
+    img {
+      max-width:300px;
+    }
+    blockquote{
+      font-style:italic;
+      display:inline-block;
+      vertical-align:100px;
+      padding:20px;
+      background:hotpink;
+      line-height:1.8;
+    }
+    blockquote small{
+      display:block;
+      text-align:right;
+    }
+    blockquote small a{
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>The many logi of io.js</h1>
+  <blockquote>
+    "Plurality beats voting much of the time. Let there be lots of options!"
+    <small><a href="https://github.com/iojs/io.js/issues/37#issuecomment-65689971">aredridel</a></small>
+  </blockquote>
+
+
+  <script>
+  function renderLogo (logo) {
+    var link = document.createElement('a')
+    link.href = logo.comment.url
+    link.title = logo.user.login
+
+    var img = document.createElement('img')
+    img.src = logo.url
+
+    link.appendChild(img)
+    document.body.appendChild(link)
+  }
+
+  var xhr = new XMLHttpRequest()
+  xhr.open('GET', '/data', true)
+  xhr.responseType = 'json'
+  xhr.onload = function(e) {
+    if (this.status == 200) {
+
+      var logos = xhr.response
+      console.log(logos)
+
+      logos.forEach(renderLogo)
+    }
+  }
+  xhr.send()
+  </script>
+</body>
+</html>
