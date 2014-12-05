@@ -31,7 +31,7 @@
 
     var toast = document.createElement('div')
     toast.className = 'toast'
-    toast.innerHTML = 'Created by: ' + logo.user.login.replace(/\</g, '&lt;')
+    toast.innerHTML = 'By: ' + logo.user.login.replace(/\</g, '&lt;')
 
     link.appendChild(img)
     link.appendChild(icon)
@@ -53,16 +53,19 @@
   }
   xhr.send()
 
-  document.body.addEventListener('click', function (e) {
-    // definitely need some jquery up in here
-    var logo
-    if (e.target.classList.contains('logo')) logo = e.target
-    else if (e.target.parentNode.classList.contains('logo')) logo = e.target.parentNode
-    else return
+  /*
+  // Disabled as per https://github.com/olizilla/iojs-logo/pull/3#issuecomment-65800758
 
-    logo.classList.toggle('selected')
-    e.preventDefault()
-  })
+  document.body.addEventListener('click', function (e) {
+  var logo
+  if (e.target.classList.contains('logo')) logo = e.target
+  else if (e.target.parentNode.classList.contains('logo')) logo = e.target.parentNode
+  else return
+
+  logo.classList.toggle('selected')
+  e.preventDefault()
+})
+*/
   </script>
 </body>
 </html>
