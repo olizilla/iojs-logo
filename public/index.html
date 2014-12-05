@@ -5,33 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>io.js logo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body{
-      font-family:futura;
-      text-align:center;
-    }
-    h1{
-      font-weight:400;
-    }
-    img {
-      max-width:300px;
-    }
-    blockquote{
-      font-style:italic;
-      display:inline-block;
-      vertical-align:100px;
-      padding:20px;
-      background:hotpink;
-      line-height:1.8;
-    }
-    blockquote small{
-      display:block;
-      text-align:right;
-    }
-    blockquote small a{
-      color: white;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="animate.css">
 </head>
 <body>
   <h1>The many logi of io.js</h1>
@@ -44,13 +19,23 @@
   <script>
   function renderLogo (logo) {
     var link = document.createElement('a')
+    link.className = 'logo'
     link.href = logo.comment.url
     link.title = logo.user.login
 
     var img = document.createElement('img')
     img.src = logo.url
 
+    var icon = document.createElement('span')
+    icon.className = 'icon'
+
+    var toast = document.createElement('div')
+    toast.className = 'toast'
+    toast.innerHTML = 'Created by: ' + logo.user.login.replace(/\</g, '&lt;')
+
     link.appendChild(img)
+    link.appendChild(icon)
+    link.appendChild(toast)
     document.body.appendChild(link)
   }
 
@@ -67,6 +52,17 @@
     }
   }
   xhr.send()
+
+  document.body.addEventListener('click', function (e) {
+    // definitely need some jquery up in here
+    var logo
+    if (e.target.classList.contains('logo')) logo = e.target
+    else if (e.target.parentNode.classList.contains('logo')) logo = e.target.parentNode
+    else return
+
+    logo.classList.toggle('selected')
+    e.preventDefault()
+  })
   </script>
 </body>
 </html>
