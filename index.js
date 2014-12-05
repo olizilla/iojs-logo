@@ -36,7 +36,7 @@ function init () {
   initServer()
 
   setInterval(function(){
-    winston.info('Checking for moar...')
+    winston.debug('Checking for moar...')
     getLogos(function (err, res) {
       if (err) return winston.error(err)
       // rebuild the list. Keep the first one, as it's not in the commments but the issue.
@@ -49,6 +49,7 @@ function initServer () {
   var port = process.env.PORT || 8080
 
   http.createServer(function (req, res) {
+    winston.info(req.method, req.url, req.headers['referer'], req.headers['user-agent'])
     if (req.url === '/data') {
       res.writeHead(200, {'Content-Type': 'application/json'});
       return res.end(JSON.stringify(logos));
@@ -70,7 +71,7 @@ function getLogosByPage (page, logos, done) {
     if (!comments.length) return done(null, logos)
 
     var res = comments.map(extractLogos).reduce(flatten, [])
-    winston.info('Got ' + res.length +  ' logos from page ' + page)
+    winston.debug('Got ' + res.length +  ' logos from page ' + page)
     logos = logos.concat(res)
     getLogosByPage(page + 1, logos, done)
   })
