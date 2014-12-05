@@ -1,4 +1,5 @@
 # The many logi of IOJS
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/olizilla/iojs-logo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 > "Plurality beats voting much of the time. Let there be lots of options!"
 [aredridel](https://github.com/iojs/io.js/issues/37#issuecomment-65689971)
