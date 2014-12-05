@@ -4,7 +4,7 @@ winston.add(winston.transports.Console, {timestamp:true})
 if (!process.env.GH_KEY) winston.warn('No GH_KEY found in ENV. You may be throttled')
 
 const github = require('octonode')
-const client = github.client(process.env.KEY);
+const client = github.client(process.env.GH_KEY);
 const issue = client.issue('iojs/io.js', 37)
 const http = require('http')
 const ecstatic = require('ecstatic')({ root: __dirname + '/public' })
