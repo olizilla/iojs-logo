@@ -3,6 +3,7 @@ winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, {timestamp:true})
 if (!process.env.GH_KEY) winston.warn('No GH_KEY found in ENV. You may be throttled')
 
+const shuffle = require('lodash.shuffle')
 const github = require('octonode')
 const client = github.client(process.env.GH_KEY);
 const issue = client.issue('iojs/io.js', 37)
@@ -65,7 +66,7 @@ function initServer () {
     winston.info(req.method, req.url, req.headers['referer'], req.headers['user-agent'])
     if (req.url === '/data') {
       res.writeHead(200, {'Content-Type': 'application/json'});
-      return res.end(JSON.stringify(logos));
+      return res.end(JSON.stringify(shuffle(logos)));
     } else {
       ecstatic(req, res)
     }
