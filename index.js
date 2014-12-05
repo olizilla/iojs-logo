@@ -10,11 +10,17 @@ const http = require('http')
 const ecstatic = require('ecstatic')({ root: __dirname + '/public' })
 const isImage = /(!\[.*?\]\()(.+?)(\))/g
 const excludedImages = [
+  'http://nodeforward.org/node-forward.png',
+  'http://www.crewpatches.com/images/patch_nasa_vector_ii_240x240.jpg',
+  'https://m1.behance.net/rendition/modules/14539849/disp/0a5204aa473b5d26fc0efed400fe83ce.jpg',
+  'https://m1.behance.net/rendition/modules/14539847/disp/7c8850a73c420ec3bc30d361e65a5751.jpg',
+  'http://www.galacticvoyager.com/collect/nasaworm330.jpg',
   'https://cloud.githubusercontent.com/assets/4780756/5292274/8891edee-7b57-11e4-8358-3d27dbf057f2.jpg',
   'https://cloud.githubusercontent.com/assets/254782/5296489/b8144ea2-7ba4-11e4-811b-bb7a45319497.jpg',
-  'https://camo.githubusercontent.com/5a195429051ea35ea439d22c9e777ebfcb49a274/68747470733a2f2f692e696d6775722e636f6d2f69344e594668412e676966',
-  'https://camo.githubusercontent.com/f7af2c468a8175239dd5cd1c6eef2ff1b6db1e25/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f662e636c2e6c792f6974656d732f3276304e336330413350337333513378334433302f6e6f742d676f6f676c652d696f2e6a7067',
-  'https://cloud.githubusercontent.com/assets/58871/5309797/7a49a626-7c21-11e4-8d1b-a44ebfc45da5.png'
+  'https://i.imgur.com/i4NYFhA.gif',
+  'https://s3.amazonaws.com/f.cl.ly/items/2v0N3c0A3P3s3Q3x3D30/not-google-io.jpg',
+  'https://cloud.githubusercontent.com/assets/58871/5309797/7a49a626-7c21-11e4-8d1b-a44ebfc45da5.png',
+  'http://fisica.cab.cnea.gov.ar/estadistica/abramson/celestia/gallery/slides/Io-Jupiter.jpg'
 ];
 
 var logos = [{
