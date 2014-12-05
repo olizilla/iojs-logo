@@ -87,7 +87,7 @@ function extractLogos (comment) {
       url: url,
       comment:{
         body: comment.body,
-        url: comment.url
+        url: comment.html_url
       },
       user: {
         login: comment.user.login,
