@@ -10,6 +10,7 @@
 </head>
 <body>
   <h1>The many logi of io.js</h1>
+  <div id="count"></div>
   <blockquote>
     "Plurality beats voting much of the time. Let there be lots of options!"
     <small><a href="https://github.com/iojs/io.js/issues/37#issuecomment-65689971">aredridel</a></small>
@@ -47,6 +48,10 @@
 
       var logos = xhr.response
       console.log(logos)
+      if (logos && logos.length) {
+        document.getElementById("count").innerHTML = logos.length + " and counting"
+      }
+      
 
       logos.forEach(renderLogo)
     }
