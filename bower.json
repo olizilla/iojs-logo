@@ -1,0 +1,23 @@
+{
+  "name": "iojs-logo",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/brock/iojs-logo",
+  "authors": [
+    "Brock Angelo <brockangelo@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery.lazyload": "~1.9.3",
+    "jquery": "~2.1.1",
+    "handlebars": "~2.0.0"
+  }
+}

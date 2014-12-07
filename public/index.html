@@ -15,62 +15,65 @@
     "Plurality beats voting much of the time. Let there be lots of options!"
     <small><a href="https://github.com/iojs/io.js/issues/37#issuecomment-65689971">aredridel</a></small>
   </blockquote>
+  <div id="logo-grid"></div>
 
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/jquery.lazyload/jquery.lazyload.js"></script>
+  <script src="bower_components/jquery.lazyload/jquery.scrollstop.js"></script>
+  <script src="bower_components/handlebars/handlebars.js"></script>
+  <!-- endbower -->
+  
+  <script id="image-template" type="text/x-handlebars-template">
+    <a class="logo" href="{{logo.comment.url}}" title="{{logo.user.login}}" id="{{{getCommentFromURL logo.comment.url}}}">
+      <img class="lazy" data-original="{{logo.url}}"></img>
+      <div class="toast">By: {{logo.user.login}}</div>
+    </a>
+  </script>
   <script>
-  function renderLogo (logo) {
-    var link = document.createElement('a')
-    link.className = 'logo'
-    link.href = logo.comment.url
-    link.title = logo.user.login
-    link.id = link.hash.substring(1)
+    Handlebars.registerHelper('getCommentFromURL', function(passedURL) {
+      var comment = passedURL.substring(passedURL.indexOf('#')+1);
+      return new Handlebars.SafeString(comment);
+    });
+    function renderLogo (logo) {
+      var source   = $("#image-template").html();
+      var template = Handlebars.compile(source);
+      var output = template({logo: logo});
+      $("#logo-grid").append(output);    
+    }
 
-    var img = document.createElement('img')
-    img.src = logo.url
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', '/data', true)
+    xhr.responseType = 'json'
+    xhr.onload = function(e) {
+      if (this.status == 200) {
 
-    var icon = document.createElement('span')
-    icon.className = 'icon'
-
-    var toast = document.createElement('div')
-    toast.className = 'toast'
-    toast.innerHTML = 'By: ' + logo.user.login.replace(/\</g, '&lt;')
-
-    link.appendChild(img)
-    link.appendChild(icon)
-    link.appendChild(toast)
-    document.body.appendChild(link)
-  }
-
-  var xhr = new XMLHttpRequest()
-  xhr.open('GET', '/data', true)
-  xhr.responseType = 'json'
-  xhr.onload = function(e) {
-    if (this.status == 200) {
-
-      var logos = xhr.response
-      console.log(logos)
-      if (logos && logos.length) {
-        document.getElementById("count").innerHTML = logos.length + " and counting"
+        var logos = xhr.response
+        console.log(logos)
+        if (logos && logos.length) {
+          $("#count").text(logos.length + " and counting");
+        }
+        logos.forEach(renderLogo)
+        $('img.lazy').lazyload()
+        
       }
-
-
       logos.forEach(renderLogo)
     }
-  }
-  xhr.send()
+    xhr.send()
 
-  /*
-  // Disabled as per https://github.com/olizilla/iojs-logo/pull/3#issuecomment-65800758
+    /*
+    // Disabled as per https://github.com/olizilla/iojs-logo/pull/3#issuecomment-65800758
 
-  document.body.addEventListener('click', function (e) {
-  var logo
-  if (e.target.classList.contains('logo')) logo = e.target
-  else if (e.target.parentNode.classList.contains('logo')) logo = e.target.parentNode
-  else return
+    document.body.addEventListener('click', function (e) {
+    var logo
+    if (e.target.classList.contains('logo')) logo = e.target
+    else if (e.target.parentNode.classList.contains('logo')) logo = e.target.parentNode
+    else return
 
-  logo.classList.toggle('selected')
-  e.preventDefault()
-})
-*/
+    logo.classList.toggle('selected')
+    e.preventDefault()
+  })
+  */
   </script>
 </body>
 </html>

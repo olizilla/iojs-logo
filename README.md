@@ -8,5 +8,7 @@
 
 ```shell
  npm install
+ bower install
+ grunt wiredep // only needed if after you add something new with bower
  GH_KEY=[your github app token here] PORT="1337" npm start
 ```
