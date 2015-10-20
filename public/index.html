@@ -32,7 +32,7 @@
 
     var toast = document.createElement('div')
     toast.className = 'toast'
-    toast.innerHTML = 'By: ' + logo.user.login.replace(/\</g, '&lt;')
+    toast.innerHTML = '@' + logo.user.login.replace(/\</g, '&lt;')
 
     link.appendChild(img)
     link.appendChild(icon)
@@ -41,7 +41,7 @@
   }
 
   var xhr = new XMLHttpRequest()
-  xhr.open('GET', '/data', true)
+  xhr.open('GET', '/logos.json', true)
   xhr.responseType = 'json'
   xhr.onload = function(e) {
     if (this.status == 200) {
@@ -58,19 +58,6 @@
   }
   xhr.send()
 
-  /*
-  // Disabled as per https://github.com/olizilla/iojs-logo/pull/3#issuecomment-65800758
-
-  document.body.addEventListener('click', function (e) {
-  var logo
-  if (e.target.classList.contains('logo')) logo = e.target
-  else if (e.target.parentNode.classList.contains('logo')) logo = e.target.parentNode
-  else return
-
-  logo.classList.toggle('selected')
-  e.preventDefault()
-})
-*/
   </script>
 </body>
 </html>
