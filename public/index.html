@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>io.js logo</title>
+  <title>node.js logo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="animate.css">
 </head>
 <body>
-  <h1>The many logi of io.js</h1>
+  <h1>The many logi of node.js</h1>
   <div id="count"></div>
   <blockquote>
-    "Plurality beats voting much of the time. Let there be lots of options!"
-    <small><a href="https://github.com/iojs/io.js/issues/37#issuecomment-65689971">aredridel</a></small>
+    "Now would be a good time to bring the turtle back"
+    <small><a href="https://github.com/nodejs/evangelism/issues/179#issuecomment-149767337">jfhbrook</a></small>
   </blockquote>
 
   <script>
@@ -22,6 +22,7 @@
     link.className = 'logo'
     link.href = logo.comment.url
     link.title = logo.user.login
+    link.target = "show"
     link.id = link.hash.substring(1)
 
     var img = document.createElement('img')
