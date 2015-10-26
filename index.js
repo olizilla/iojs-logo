@@ -10,7 +10,8 @@ if (!process.env.GH_KEY) winston.warn('No GH_KEY found in ENV. You may be thrott
 
 const client = github.client(process.env.GH_KEY)
 const issue = client.issue('nodejs/evangelism', 179)
-const isImage = /(!\[.*?\]\()(.+?)(\))/g
+const isMarkdownImg = /!\[.*\]\((http.+)\)/g
+const isHtmlImg = /<\s*img\s+.*src="(http.+)"/g
 const excludedImages = []
 
 var logos = []
@@ -79,13 +80,28 @@ function extractLogos (comment) {
 }
 
 function pullImageUrlsFromMarkdown (md) {
-  var urls = []
-  var match = isImage.exec(md)
-  while (match !== null) {
-    if (excludedImages.indexOf(match[2]) === -1) {
-      urls.push(match[2])
+  var mdImages = matchAll(md, isMarkdownImg)
+  var htmlImages = matchAll(md, isHtmlImg)
+  var urls = mdImages.concat(htmlImages)
+  return urls.filter(notExcluded)
+}
+
+function notExcluded (url) {
+  return excludedImages.indexOf(url) === -1
+}
+
+// SO! http://stackoverflow.com/questions/6323417/how-do-i-retrieve-all-matches-for-a-regular-expression-in-javascript
+function matchAll (str, regex) {
+  var res = []
+  var m
+  if (regex.global) {
+    while (m = regex.exec(str)) {
+      res.push(m[1])
     }
-    match = isImage.exec(md)
+  } else {
+    if (m = regex.exec(str)) {
+      res.push(m[1])
+    }
   }
-  return urls
+  return res
 }
